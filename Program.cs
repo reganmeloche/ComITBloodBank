@@ -11,7 +11,7 @@ namespace BloodClinic
             Console.WriteLine("Welcome to the ComIT Blood bank!");
 
             while (true) {
-                Console.WriteLine("d - make donation; r - request donation; q - quit");
+                Console.WriteLine("d - make donation; r - request donation; u - send update; q - quit");
 
                 string userInput = Console.ReadLine();
 
@@ -21,6 +21,10 @@ namespace BloodClinic
 
                 if (userInput == "r") {
                     theBloodBank.RequestDonation();
+                }
+
+                if (userInput == "u") {
+                    theBloodBank.SendUpdateToAllMembers();
                 }
 
                 if (userInput == "q") {
