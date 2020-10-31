@@ -9,6 +9,10 @@ namespace BloodClinic
 
         public string Letter { get; set; } //O, A, B, AB
         public char Sign { get; set; } // -/+
-        
+
+        // TODO: Implement this
+        public bool CanDonateTo(BloodType otherBloodType) {
+            return true;
+        }
     }
 }

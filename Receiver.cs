@@ -17,5 +17,13 @@ namespace BloodClinic
             Console.WriteLine($"Name: {FullName}");
             Console.WriteLine($"Last Received Date: {LastReceivedDate}\n");
         }
+
+        public override string ToString() {
+            string details = "";
+            details += $"Name: {FullName}\n";
+            details += $"Blood Type: {MemberBloodType.Letter}{MemberBloodType.Sign}\n";
+            details += $"Last Received Date: {LastReceivedDate}\n"; 
+            return details;
+        }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace BloodClinic
 {
-    public class Member
+    public abstract class Member
     {
         public Member(string firstName, string lastName, DateTime dateOfBirth, BloodType memberBloodType, string email) {
             Id = Guid.NewGuid();
@@ -27,9 +27,6 @@ namespace BloodClinic
             }
         }
 
-        public virtual void SendUpdate() {
-            Console.WriteLine($"Sending update to: {FullName}");
-        }
-    
+        public abstract void SendUpdate();
     }
 }
