@@ -7,9 +7,9 @@ namespace BloodClinic
     {
         public BloodBank(IStoreDonors donorStorageArg) {
             _donorStorage = donorStorageArg;
+            _donations = new List<Donation>(); // 3.3: This should be replaced with a constructor argument
 
             _receivers = new List<Receiver>();
-            _donations = new List<Donation>();
 
             // TODO: Add all blood types
             BloodType typeONeg = new BloodType("O",'-');
@@ -31,8 +31,9 @@ namespace BloodClinic
 
         // Storage
         private IStoreDonors _donorStorage;
+        private List<Donation> _donations; // 3.3: This should be replaced with an interface
         private List<Receiver> _receivers;
-        private List<Donation> _donations;
+        
 
 
         public Donation MakeDonation(Guid donorId) {
@@ -49,7 +50,7 @@ namespace BloodClinic
             donor.Donate();
 
             // Store the donation
-            _donations.Add(newDonation);
+            _donations.Add(newDonation); // 3.3: This should be replaced with an interface
 
             return newDonation;
         }
