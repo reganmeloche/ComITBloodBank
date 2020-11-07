@@ -1,6 +1,6 @@
 using System;
 
-namespace BloodClinic
+namespace BloodClinic.Models
 {
     public class Donor : Member
     {
@@ -22,15 +22,9 @@ namespace BloodClinic
             NumTimesDonated++;
         }
 
-        public override void SendUpdate() {
-            Console.WriteLine("\nHello donor!");
-            Console.WriteLine($"Name: {FullName}");
-            Console.WriteLine($"Num times donated: {NumTimesDonated}");
-            Console.WriteLine($"Last Donation Date: {LastDonatedDate}\n");
-        }
-
         public override string ToString() {
-            string details = "";
+            string details = "----- DONOR -----\n";
+            details += $"Id: {Id}\n";
             details += $"Name: {FullName}\n";
             details += $"Blood Type: {MemberBloodType.Letter}{MemberBloodType.Sign}\n";
             details += $"Last Donation Date: {LastDonatedDate}\n"; 

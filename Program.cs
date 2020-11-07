@@ -1,22 +1,35 @@
 ﻿using System;
 
+using BloodClinic.Models;
+using BloodClinic.Storage;
+
 namespace BloodClinic
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var donorStorageSystem = new DonorStorageDB();
+            // connect to the database
+            
+            var donorStorageSystem = new DonorStorageList();
+            var receiverStorageSystem = new ReceiverStorageList();
+            var donationStorageSystem = new DonationStorageList();
             // 3.3: Initialize the donationStorageSystem and inject it into the BloodBank constructor
-            var theBloodBank = new BloodBank(donorStorageSystem);
+            var theBloodBank = new BloodBank(donorStorageSystem, donationStorageSystem, receiverStorageSystem);
 
             Console.WriteLine("Welcome to the ComIT Blood bank!");
 
             while (true) {
-                Console.WriteLine("d - make donation; r - request donation; u - send update; p - print details; q - quit");
-
+                Console.WriteLine("\nPlease select an option:\n" +
+                    "- d: make a donation\n" + 
+                    "- r: request a donation\n" +
+                    "- a: list all donations\n" +
+                    "- m: list all members\n" +
+                    "- q: quit\n"
+                );
                 string userInput = Console.ReadLine();
 
+                // MAKE DONATION
                 if (userInput == "d") {
                     Console.WriteLine("Please enter the Donor ID:");
                     string donorId = Console.ReadLine();
@@ -27,22 +40,52 @@ namespace BloodClinic
                         Console.WriteLine($"Donation complete. ID: {donation.Id}");
                     }
                     catch (Exception e) {
-                        // Handle the exception in here
-                        Console.WriteLine($"Exception generated: {e.Message}");
+                        Console.WriteLine($"Error: {e.Message}");
                     }
                 }
 
+                // REQUEST DONATION
                 if (userInput == "r") {
-                    theBloodBank.RequestDonation();
+                    Console.WriteLine("Please enter the Receiver ID:");
+                    string receiverId = Console.ReadLine();
+                    
+                    try {
+                        Guid receiverIdGuid = Guid.Parse(receiverId);
+                        bool success = theBloodBank.RequestDonation(receiverIdGuid);
+                        
+                        if (success) {
+                            Console.WriteLine($"Transaction successful");
+                        } else {
+                            Console.WriteLine($"No available donations at this time.");
+                        }
+                    }
+                    catch (Exception e) {
+                        Console.WriteLine($"Error: {e.Message}");
+                    }
                 }
 
-                if (userInput == "u") {
-                    theBloodBank.SendUpdateToAllMembers();
+                // VIEW ALL DONATIONS
+                if (userInput == "a") {
+                    try {
+                        var donations = theBloodBank.GetDonations();
+                        foreach (var donation in donations) {
+                            Console.WriteLine(donation.ToString());
+                        }
+                    } catch (Exception e) {
+                        Console.WriteLine($"Error: {e.Message}");
+                    }
                 }
 
-                if (userInput == "p") {
-                    string memberDetails = theBloodBank.GetAllMemberDetails();
-                    Console.WriteLine(memberDetails);
+                // VIEW ALL MEMBERS
+                if (userInput == "m") {
+                    try {
+                        var members = theBloodBank.GetMembers();
+                        foreach (var member in members) {
+                            Console.WriteLine(member.ToString());
+                        }
+                    } catch (Exception e) {
+                        Console.WriteLine($"Error: {e.Message}");
+                    }
                 }
 
                 if (userInput == "q") {

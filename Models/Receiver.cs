@@ -1,6 +1,6 @@
 using System;
 
-namespace BloodClinic
+namespace BloodClinic.Models
 {
     public class Receiver : Member
     {
@@ -12,14 +12,10 @@ namespace BloodClinic
 
         public DateTime LastReceivedDate { get; set; }
 
-        public override void SendUpdate() {
-            Console.WriteLine("\nHello receiver!");
-            Console.WriteLine($"Name: {FullName}");
-            Console.WriteLine($"Last Received Date: {LastReceivedDate}\n");
-        }
 
         public override string ToString() {
-            string details = "";
+            string details = "----- RECEIVER -----\n";
+            details += $"Id: {Id}\n";
             details += $"Name: {FullName}\n";
             details += $"Blood Type: {MemberBloodType.Letter}{MemberBloodType.Sign}\n";
             details += $"Last Received Date: {LastReceivedDate}\n"; 

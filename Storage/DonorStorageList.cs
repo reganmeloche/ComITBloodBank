@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace BloodClinic
+using BloodClinic.Models;
+
+namespace BloodClinic.Storage
 {
     public class DonorStorageList : IStoreDonors
     {
@@ -29,6 +31,10 @@ namespace BloodClinic
                 throw new Exception($"Donor {donorId} not found!");
             }
             return donor;
+        }
+
+        public List<Donor> GetAll() {
+            return _donors;
         }
     }
 }

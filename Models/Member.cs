@@ -1,6 +1,6 @@
 using System;
 
-namespace BloodClinic
+namespace BloodClinic.Models
 {
     public abstract class Member
     {
@@ -26,7 +26,5 @@ namespace BloodClinic
                 return LastName + ", "  + FirstName;
             }
         }
-
-        public abstract void SendUpdate();
     }
 }
