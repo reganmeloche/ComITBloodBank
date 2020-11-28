@@ -22,7 +22,7 @@ namespace BloodClinic.Models
             if (sign != '+' && sign != '-') {
                 throw new Exception("Invalid blood type sign");
             }
-
+            
             Letter = letter;
             Sign = sign;
         }

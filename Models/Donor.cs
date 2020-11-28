@@ -10,6 +10,14 @@ namespace BloodClinic.Models
             NumTimesDonated = 0;
         }
 
+        public Donor(Guid id, string firstName, string lastName, BloodType bloodType) 
+            : base(firstName, lastName, new DateTime(), bloodType, "") {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            MemberBloodType = bloodType;
+        }
+
         public DateTime LastDonatedDate { get; private set; }
         public int NumTimesDonated { get; private set; }
 

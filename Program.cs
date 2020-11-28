@@ -1,7 +1,16 @@
 ﻿using System;
-
+using Npgsql;
 using BloodClinic.Models;
 using BloodClinic.Storage;
+
+/// DB
+// var connectionString = "Host=suleiman.db.elephantsql.com;Port=5432;Database=qshjhpqq;Username=qshjhpqq;Password=tITRK0kmZLfG-ni_y4vY2E9zHj4vX8QJ;";
+// var conn = new NpgsqlConnection(connectionString);
+// conn.Open();
+
+// var donorStorageSystem = new DonorStorageDB(conn);
+// var receiverStorageSystem = new ReceiverStorageList();
+// var donationStorageSystem = new DonationStorageDB(conn, donorStorageSystem); 
 
 namespace BloodClinic
 {
@@ -9,11 +18,22 @@ namespace BloodClinic
     {
         static void Main(string[] args)
         {
-            // connect to the database
-            
-            var donorStorageSystem = new DonorStorageList();
+            // LIST
+            // var donorStorageSystem = new DonorStorageList();
+            // var receiverStorageSystem = new ReceiverStorageList();
+            // var donationStorageSystem = new DonationStorageList();
+
+            // DB 
+            string connectionString = "Host=suleiman.db.elephantsql.com;Port=5432;Database=qshjhpqq;Username=qshjhpqq;Password=[REDACTED];";
+            var sqlConnection = new NpgsqlConnection(connectionString);
+            sqlConnection.Open();
+
+            var donorStorageSystem = new DonorStorageDB(sqlConnection);
             var receiverStorageSystem = new ReceiverStorageList();
-            var donationStorageSystem = new DonationStorageList();
+            var donationStorageSystem = new DonationStorageDB(sqlConnection, donorStorageSystem);
+
+
+
             // 3.3: Initialize the donationStorageSystem and inject it into the BloodBank constructor
             var theBloodBank = new BloodBank(donorStorageSystem, donationStorageSystem, receiverStorageSystem);
 
