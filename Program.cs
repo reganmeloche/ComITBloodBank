@@ -3,14 +3,6 @@ using Npgsql;
 using BloodClinic.Models;
 using BloodClinic.Storage;
 
-/// DB
-// var connectionString = "Host=suleiman.db.elephantsql.com;Port=5432;Database=qshjhpqq;Username=qshjhpqq;Password=tITRK0kmZLfG-ni_y4vY2E9zHj4vX8QJ;";
-// var conn = new NpgsqlConnection(connectionString);
-// conn.Open();
-
-// var donorStorageSystem = new DonorStorageDB(conn);
-// var receiverStorageSystem = new ReceiverStorageList();
-// var donationStorageSystem = new DonationStorageDB(conn, donorStorageSystem); 
 
 namespace BloodClinic
 {
